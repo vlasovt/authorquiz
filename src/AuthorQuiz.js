@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
 import './AuthorQuiz.css';
 import './bootstrap.min.css';
@@ -58,6 +59,13 @@ function Continue() {
   );
 }
 
+function Footer() {
+  return (
+    <div className="row">
+    </div>
+  );
+}
+
 function Book({title, onClick}) {
   return (
     <div className="answer" onClick={() => {onClick(title)}}>
@@ -72,6 +80,8 @@ function Book({title, onClick}) {
       <Hero />
       <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
       <Continue />
+      <p><Link to="/add">Add Author</Link></p>
+      <Footer />
     </div>
   );
 }
