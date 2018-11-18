@@ -30,7 +30,7 @@ function Turn({ author, books, highlight, onAnswerSelected}) {
   return (
     <div className="row turn" style={{backgroundColor: highlightToBackgroundColor(highlight)}}>
       <div className="col-4 offset-1">
-        <img src={author.imageUrl} alt="" className="authorImage" alt="highlightToBackgroundColor(highlight)"/>
+        <img src={author.imageUrl}  className="authorImage" alt="author"/>
       </div>
       <div className="col-6">
         {books.map((title) => <Book title={title} key={title} onClick={onAnswerSelected} /> )}
@@ -52,12 +52,18 @@ Turn.propTypes = {
 };
 
 
-function Continue() {
+function Continue({ show, onContinue }) {
   return (
-    <div className="row">
+    <div className="row continue">
+      {show
+        ? <div className="col-11">
+          <button className="btn btn-primary btn-lg float-right" onClick={onContinue}>Continue</button>
+        </div>
+        : null}
     </div>
   );
 }
+
 
 function Footer() {
   return (
@@ -74,12 +80,12 @@ function Book({title, onClick}) {
   );
 }
 
-  function AuthorQuiz({ turnData, highlight, onAnswerSelected}) {
+function AuthorQuiz({ turnData, highlight, onAnswerSelected, onContinue}) {
   return (
     <div className="container-fluid">
       <Hero />
       <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
-      <Continue />
+      <Continue show={highlight === 'correct'} onContinue={onContinue} />
       <p><Link to="/add">Add Author</Link></p>
       <Footer />
     </div>
